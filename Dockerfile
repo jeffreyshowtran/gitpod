@@ -9,7 +9,7 @@ RUN apt install -y python3-dev python3 python3-pip
 #install the libraries needed into the container 
 RUN pip install --no-cache-dir pdfplumber 
 
-#identify the working directory in github 
+#identify the working directory 
 WORKDIR /work
 
 #copy to all to work directory 
@@ -18,8 +18,7 @@ COPY . /work/
 #run the python script pdf2txt1_v1.2
 CMD [ "python3", "pdf2txt1_v1.2.py" ]
 
-
-#best practice for pip installs is to run pip cache purge after all pip install calls
-# Example install procedure is bellow 
-# pip install numpy
-# pip cache purge
+# when you run the container in the file system: 
+# > docker run -it --entrypoint /bin/bash -v /workspace/gitpod:/gitpod test
+# the kicker here is to redirect the default volume where the container is looking 
+# to the volume where the data files live 
